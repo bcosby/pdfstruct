@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdfstruct"
+version = "0.1.0"
+description = "A fast, dependency-free PDF parser that extracts document structure and content into JSON."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "pdfstruct contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+pdfstruct = "pdfstruct.cli:main"
+
+[tool.setuptools]
+packages = ["pdfstruct"]
