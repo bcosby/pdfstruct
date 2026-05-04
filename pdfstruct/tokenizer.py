@@ -1,5 +1,7 @@
 import re
 
+NULL_TOKEN = object()
+
 WHITESPACE = b"\x00\x09\x0A\x0C\x0D\x20"
 DELIMS = b"()<>[]{}/%"
 
@@ -55,7 +57,7 @@ class Tokenizer:
         if tok == "false":
             return False
         if tok == "null":
-            return None
+            return NULL_TOKEN
         try:
             if "." in tok or tok.startswith(("+", "-")) and tok[1:].isdigit() or tok.isdigit():
                 return float(tok) if "." in tok else int(tok)

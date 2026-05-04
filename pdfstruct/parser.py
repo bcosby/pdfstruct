@@ -46,15 +46,15 @@ class PDFParser:
             else:
                 tok = Tokenizer(body)
                 parsed = []
-                while True:
+                while not tok.eof():
                     t = tok.next_token()
                     if t is None:
-                        break
+                        continue
                     parsed.append(t)
                 obj_val = {"type": "tokens", "value": parsed}
             if not no_objects and not text_only:
                 doc["objects"][key] = obj_val
-        pages = list(re.finditer(rb"<<[^>]*?/Type\s*/Page[^>]*?>>", data, re.S))
+        pages = list(re.finditer(rb"<<[^>]*?/Type\s*/Page(?!s)\b[^>]*?>>", data, re.S))
         for idx, pm in enumerate(pages):
             d = pm.group(0)
             media = [0,0,612,792]

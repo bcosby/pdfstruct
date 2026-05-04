@@ -6,10 +6,10 @@ def parse_content_stream(data: bytes) -> list[dict]:
     t = Tokenizer(data)
     args = []
     ops = []
-    while True:
+    while not t.eof():
         tok = t.next_token()
         if tok is None:
-            break
+            continue
         if isinstance(tok, str) and tok in OPS:
             ops.append({"op": tok, "args": args})
             args = []
